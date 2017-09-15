@@ -2,9 +2,9 @@
 
 ## unicode example
 
-(https://github.com/wmacevoy/compiler-fall2017-public/tree/unicode/unicode)[https://github.com/wmacevoy/compiler-fall2017-public/tree/unicode/unicode]
+https://github.com/wmacevoy/compiler-fall2017-public/tree/unicode/unicode
 
 ## flex/bison example
 
-(https://github.com/wmacevoy/compiler-fall2017-public/tree/example1/example1)[https://github.com/wmacevoy/compiler-fall2017-public/tree/example1/example1]
+https://github.com/wmacevoy/compiler-fall2017-public/tree/example1/example1
 
