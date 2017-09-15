@@ -2,7 +2,7 @@
 
 ## Unix
 
-Look at the makefile.  The -ll (mac) might be -fl on linux.
+Look at the makefile.  The -ll (mac) might be -lfl on linux.
 
 ## Windows (Visual Studio)
 
