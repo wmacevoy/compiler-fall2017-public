@@ -1,12 +1,12 @@
-%option noyywrap
+%option noyywrap c++
 
 %{
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
 #include "example1.h"
-#include "example1.tab.h"
-#define DEBUG_LEXER 1  
+#include "example1.tab.hpp"
+#define DEBUG_LEXER 1
 %}
 
 %%

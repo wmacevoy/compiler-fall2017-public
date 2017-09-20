@@ -2,10 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include "example1.h"
+#include <FlexLexer.h>
+yyFlexLexer lex;
+
+int yylex() { return lex.yylex(); }
 
   void yyerror(const char *str);
   int yywrap();
-  int yylex();
 %}
 
 %token NUMBER START STOP WORD EOL WS
