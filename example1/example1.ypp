@@ -2,13 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "example1.h"
-#include <FlexLexer.h>
-yyFlexLexer lex;
 
-int yylex() { return lex.yylex(); }
-
-  void yyerror(const char *str);
   int yywrap();
+  int yylex();
+  void yyerror(const char *str);
 %}
 
 %token NUMBER START STOP WORD EOL WS
@@ -29,10 +26,12 @@ command :
 
 start_command :
      optional_ws START WS WORD WS NUMBER optional_ws EOL
+     { printf("START %s %d\n",$4.svalue,$6.ivalue);  }
      ;
 
 stop_command :
      optional_ws STOP WS WORD optional_ws EOL
+     { printf("STOP %s\n",$4.svalue);  }     
      ;
 
 optional_ws :
@@ -42,6 +41,11 @@ optional_ws :
      ;
 
 %%
+
+int yywrap()
+{
+  return 1;
+} 
 
 void yyerror(const char *str)
 {
