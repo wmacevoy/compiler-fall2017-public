@@ -1,4 +1,4 @@
-CXXFLAGS=-std=c++11
+CXXFLAGS=-std=gnu++11
 all : example1
 
 example1.lex.cpp : example1.l
