@@ -40,7 +40,7 @@ StartCommandNode::StartCommandNode(const NodePtr &target,
 
 int StartCommandNode::type() const { return START_COMMAND; }
 void StartCommandNode::print(std::ostream &out) const {
-  out << "stop(target=" << children.at(0)
+  out << "start(target=" << children.at(0)
       << ", power=" << children.at(1) << ")";
 }
 

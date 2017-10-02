@@ -7,10 +7,10 @@ lexed 10 as NUMBER: number(10)
 lexed 
  as EOL
 start_command: WORD=word(widget) NUMBER=number(10)
-command: start_command=stop(target=word(widget), power=number(10))
+command: start_command=start(target=word(widget), power=number(10))
 commands: commands=program(children=[
 ]) // program
-command=stop(target=word(widget), power=number(10))
+command=start(target=word(widget), power=number(10))
 lexed start as START
 lexed   as WS
 lexed fozzle as WORD:word(fozzle)
@@ -19,11 +19,11 @@ lexed 0 as NUMBER: number(0)
 lexed 
  as EOL
 start_command: WORD=word(fozzle) NUMBER=number(0)
-command: start_command=stop(target=word(fozzle), power=number(0))
+command: start_command=start(target=word(fozzle), power=number(0))
 commands: commands=program(children=[
-  stop(target=word(widget), power=number(10)) // child 0
+  start(target=word(widget), power=number(10)) // child 0
 ]) // program
-command=stop(target=word(fozzle), power=number(0))
+command=start(target=word(fozzle), power=number(0))
 lexed stop as STOP
 lexed   as WS
 lexed whoozit as WORD:word(whoozit)
@@ -32,18 +32,18 @@ lexed
 stop_command: WORD=word(whoozit)
 command: stop_command=stop(target=word(whoozit))
 commands: commands=program(children=[
-  stop(target=word(widget), power=number(10)) // child 0
-  stop(target=word(fozzle), power=number(0)) // child 1
+  start(target=word(widget), power=number(10)) // child 0
+  start(target=word(fozzle), power=number(0)) // child 1
 ]) // program
 command=stop(target=word(whoozit))
 program : commands=program(children=[
-  stop(target=word(widget), power=number(10)) // child 0
-  stop(target=word(fozzle), power=number(0)) // child 1
+  start(target=word(widget), power=number(10)) // child 0
+  start(target=word(fozzle), power=number(0)) // child 1
   stop(target=word(whoozit)) // child 2
 ]) // program
 
 program(children=[
-  stop(target=word(widget), power=number(10)) // child 0
-  stop(target=word(fozzle), power=number(0)) // child 1
+  start(target=word(widget), power=number(10)) // child 0
+  start(target=word(fozzle), power=number(0)) // child 1
   stop(target=word(whoozit)) // child 2
 ]) // program
