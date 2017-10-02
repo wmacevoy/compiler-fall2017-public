@@ -1,11 +1,8 @@
 #pragma once
 
-typedef union {
-  int ivalue;
-  char *svalue;
-} yystype_t;
+#include "ast.hpp"
 
-#define YYSTYPE yystype_t
+#define YYSTYPE NodePtr
 
 extern YYSTYPE yylval;
 
