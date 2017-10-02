@@ -1,0 +1,22 @@
+lexed 'start' as START(token=259)
+lexed ' ' as WS(token=263)
+lexed 'widget' as WORD(token=261,value='widget')
+lexed ' ' as WS(token=263)
+lexed '10' as NUMBER(token=258,value=10)
+lexed '
+' as EOL(token=262)
+START widget 10
+lexed 'start' as START(token=259)
+lexed ' ' as WS(token=263)
+lexed 'fozzle' as WORD(token=261,value='fozzle')
+lexed ' ' as WS(token=263)
+lexed '0' as NUMBER(token=258,value=0)
+lexed '
+' as EOL(token=262)
+START fozzle 0
+lexed 'stop' as STOP(token=260)
+lexed ' ' as WS(token=263)
+lexed 'whoozit' as WORD(token=261,value='whoozit')
+lexed '
+' as EOL(token=262)
+STOP whoozit
