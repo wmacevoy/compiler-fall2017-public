@@ -8,7 +8,7 @@ example1.lex.cpp : example1.l
 example1.tab.hpp example1.tab.cpp : example1.ypp
 	bison -d -o example1.tab.cpp example1.ypp
 
-example1 : ast.cpp example1.lex.cpp example1.tab.cpp example1.tab.hpp
-	$(CXX) $(CXXFLAGS) ast.cpp example1.lex.cpp example1.tab.cpp -o example1 $(LDFLAGS)
+example1 : ast.cpp example1.lex.cpp example1.tab.cpp example1.tab.hpp generator.hpp generator.cpp
+	$(CXX) $(CXXFLAGS) ast.cpp example1.lex.cpp example1.tab.cpp generator.cpp -o example1 $(LDFLAGS)
 
 
