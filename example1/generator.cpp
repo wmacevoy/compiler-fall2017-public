@@ -62,17 +62,46 @@ struct SetupGenerator : public Generator {
   }
 };
 
+struct LoopGenerator : public Generator {
+  std::set < std::string > symbols;
+
+  LoopGenerator(const NodePtr &_ast) : Generator(_ast) { }
+
+  virtual void generate(std::ostream &out) {
+    out << std::endl;
+    out << "void loop() {" << std::endl;
+
+    symbols.clear();
+    findSymbols(ast);
+    for (auto word : symbols) {
+      out << "  " << word << ".update();" << std::endl;
+    }
+    out << "}" << std::endl;
+    out << std::endl;
+  }
+
+  void findSymbols(const NodePtr &ast) {
+    switch(ast->type()) {
+    case Node::WORD_LITERAL: symbols.insert(word(ast)); break;
+    default: for (auto child: ast->children) {
+        findSymbols(child);
+      }
+    }
+  }
+};
 
 struct ProgramGenerator : Generator {
   HeaderGenerator header;
-  SetupGenerator setup;  
+  SetupGenerator setup;
+  LoopGenerator loop;
 
   ProgramGenerator(const NodePtr &_ast)
-    : Generator(_ast), header(_ast), setup(_ast) {}
+    : Generator(_ast), header(_ast), setup(_ast), loop(_ast) {}
 
   virtual void generate(std::ostream &out) {
     header.generate(out);
-    setup.generate(out);    
+    setup.generate(out);
+    loop.generate(out);
   }
 };
 

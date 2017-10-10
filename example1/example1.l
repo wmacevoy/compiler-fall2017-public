@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <string.h>
 #include <map>
-#include "example1.h"
+#include "example1.hpp"
 #include "example1.tab.hpp"
 
 #define DEBUG_LEXER 1
