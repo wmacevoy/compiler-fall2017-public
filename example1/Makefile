@@ -24,5 +24,5 @@ example1 : example1.tab.o example1.lex.o ast.o generator.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean :
-	/bin/rm -rf *.o example1 example1.tab.cpp example1.tab.hpp example1.lex.cpp
+	/bin/rm -rf \#* *~ *.o example1 example1.tab.cpp example1.tab.hpp example1.lex.cpp 
 

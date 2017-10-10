@@ -47,3 +47,21 @@ program(children=[
   start(target=word(fozzle), power=number(0)) // child 1
   stop(target=word(whoozit)) // child 2
 ]) // program
+#include <GPIO.h>
+
+GPIO fozzle;
+GPIO whoozit;
+GPIO widget;
+
+void setup() {
+  widget.level(10);
+  fozzle.level(0);
+  whoozit.disabled();
+}
+
+void loop() {
+  fozzle.update();
+  whoozit.update();
+  widget.update();
+}
+
