@@ -28,7 +28,7 @@ bin/hvac : tmp/hvac.tab.o tmp/hvac.lex.o tmp/ast.o tmp/generator.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean :
-	/bin/rm -rf \#* *~ *.o hvac hvac.tab.cpp hvac.tab.hpp hvac.lex.cpp hvac.lex.cpp- tests/*.out
+	/bin/rm -rf \#* *~ *.o hvac hvac.tab.cpp hvac.tab.hpp hvac.lex.cpp hvac.lex.cpp- tests/*.out tmp/*
 
 .PHONY: tests
 tests: bin/hvac
