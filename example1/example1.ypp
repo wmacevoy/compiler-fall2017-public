@@ -13,10 +13,31 @@
   void yyerror(const char *str);
   
   NodePtr program(0);
-  
+
+  NodePtr op(const std::string &word) {
+    return NodePtr(new ExpressionNode(NodePtr(new WordNode(word))));
+  }           
+
+  NodePtr op(const std::string &word, NodePtr arg1) {
+    NodePtr ans = op(word);
+    ans->children.push_back(arg1);
+    return ans;
+  }           
+
+  NodePtr op(const std::string &word, NodePtr arg1, NodePtr arg2) {
+    NodePtr ans = op(word);
+    ans->children.push_back(arg1);
+    ans->children.push_back(arg2);
+    return ans;
+  }           
+
 %}
 
 %token NUMBER START STOP WORD EOL WS
+
+%left '+' '-'
+%left '*' '/'
+%left NEGATE
 
 %%
 program : 
@@ -67,7 +88,7 @@ stop_command
 ; /* command */
 
 start_command :
-optional_ws START WS WORD WS NUMBER optional_ws EOL
+optional_ws START WS WORD WS expression optional_ws EOL
 {
 #if DEBUG_PARSER == 1
   std::cout << "start_command: WORD=" << $4 << " NUMBER=" << $6 << std::endl;
@@ -85,6 +106,42 @@ optional_ws STOP WS WORD optional_ws EOL
   $$ = NodePtr(new StopCommandNode($4));
 }     
 ; /* stop_command */
+
+expression :
+  expression '+' expression
+  {
+    $$ = op("+",$1,$3);
+  }
+  |
+  expression '-' expression
+  {
+    $$ = op("-",$1,$3);
+  }
+  |
+  expression '*' expression
+  {
+    $$ = op("*",$1,$3);
+  }
+  |
+  expression '/' expression
+  {
+    $$ = op("/",$1,$3);  
+  }
+  |
+  '-' expression %prec NEGATE
+  {
+    $$ = op("-",$2);    
+  }
+  |
+  '(' expression ')'
+  {
+    $$=$1;
+  }
+  |
+  NUMBER {
+    $$ = op("#",$1);
+  }
+;
 
 optional_ws :
 /* empty */

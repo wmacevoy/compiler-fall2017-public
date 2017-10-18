@@ -67,6 +67,23 @@ const std::string & StopCommandNode::target() const {
   return std::dynamic_pointer_cast<WordNode>(children.at(0))->word;
 }
 
+ExpressionNode::ExpressionNode(const NodePtr &op) {
+  children.push_back(op);
+}
+
+int ExpressionNode::type() const { return EXPRESSION; }
+void ExpressionNode::print(std::ostream &out) const {
+  out << "expression(op=" << children.at(0);
+  for (size_t i=1; i<children.size(); ++i) {
+    out << "," << "arg" << i << "=" << children.at(i);
+  }
+  out << ")";
+}
+
+const std::string & ExpressionNode::op() const {
+  return std::dynamic_pointer_cast<WordNode>(children.at(0))->word;
+}
+
 int ProgramNode::type() const { return PROGRAM; }
 
 void ProgramNode::print(std::ostream &out) const {

@@ -11,7 +11,8 @@ public: enum {
     START_COMMAND,
     STOP_COMMAND,
     WORD_LITERAL,
-    NUMBER_LITERAL
+    NUMBER_LITERAL,
+    EXPRESSION,
   };
 public: std::vector < std::shared_ptr < Node > > children;
 public: virtual int type() const = 0;
@@ -63,6 +64,15 @@ public: const std::string & target() const;
 };
 
 typedef std::shared_ptr < StopCommandNode > StopCommandNodePtr;
+
+class ExpressionNode : public Node {
+public: ExpressionNode(const NodePtr &op);
+public: int type() const;
+public: void print(std::ostream &out) const;
+public: const std::string & op() const;
+};
+
+typedef std::shared_ptr < ExpressionNode > ExpressionNodePtr;
 
 class ProgramNode : public Node {
 public: int type() const;

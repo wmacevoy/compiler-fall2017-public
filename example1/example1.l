@@ -20,6 +20,14 @@
   return NUMBER;
 }
 
+[-()+*/] {
+#if DEBUG_LEXER == 1
+  std::cout << "lexed " << yytext << " as "
+     << ((int) yytext[0]) << std::endl;
+#endif
+  return yytext[0];
+}
+
 (start|stop) {
   if (strcmp(yytext, "start") == 0) {
 #if DEBUG_LEXER == 1
