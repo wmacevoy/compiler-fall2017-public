@@ -1,5 +1,12 @@
-from sets import Set
-import numpy
+import json
+import sys
+import os
+import random
+import time
+
+thisdir=os.path.abspath(os.path.dirname(sys.argv[0]))
+cfg=json.load(open(thisdir + '/config.json', 'r'))
+n=cfg["n"]
 
 class Shape:
     def __init__(self,name):
@@ -21,24 +28,13 @@ class Square(Shape):
     def draw(self):
         print "drawing square: " + self.name + " s=" + str(self.side) 
 
-c=0
-rng=numpy.random.rand(1000)
-
 def rand(n):
-    global c
-    global rng
-    if (c >= 1000):
-        rng=numpy.random.rand(1000)
-        c=1
-    else:
-        c=c + 1
-    return rng[c-1]
+    return random.randint(0,n-1)
 
 def mkShapes(n):
     shapes = list([])
-    nrng = numpy.random.randint(1,100,n)
     for i in xrange(n):
-        name = str(nrng[i]) + "(" + str(i) + ")";
+        name = str(rand(10000)) + "(" + str(i) + ")";
         if (i%10) <= 5:
             shapes.append(Circle("circle # " + name,rand(100)))
         else:
@@ -49,10 +45,12 @@ def drawShapes(shapes):
     for shape in shapes:
         shape.draw()
 
-n = 1000000
-# n = 100
+start = time.clock()
 shapes=mkShapes(n)
-sortedShapes = sorted(shapes,key = lambda shape: shape.name)
+end = time.clock()
+print "construct: " + str(end - start) + "s"
 
-# drawShapes(sortedShapes)
-    
+start = time.clock()
+sortedShapes = sorted(shapes,key = lambda shape: shape.name)
+end = time.clock()
+print "sort: " + str(end - start) + "s"

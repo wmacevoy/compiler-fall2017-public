@@ -1,9 +1,13 @@
 import sys
 import os
 import time
+import json
+
+thisdir=os.path.abspath(os.path.dirname(sys.argv[0]))
+cfg=json.load(open(thisdir + '/config.json', 'r'))
+n=cfg["n"]
 
 # dynamically include local libraries
-thisdir=os.path.abspath(os.path.dirname(sys.argv[0]))
 libdir=thisdir + "/lib"
 
 for root, dirs, files in os.walk(libdir):
@@ -52,7 +56,6 @@ def drawShapes(shapes):
     for shape in shapes:
         shape.draw()
 
-n = 1000000        
 start = time.clock()
 shapes=mkShapes(n)
 end = time.clock()
@@ -62,4 +65,3 @@ start = time.clock()
 sortedShapes = sorted(shapes,key = lambda shape: shape.name)
 end = time.clock()
 print "sort: " + str(end - start) + "s"
-    

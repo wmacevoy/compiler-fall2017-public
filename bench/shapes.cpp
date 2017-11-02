@@ -2,12 +2,17 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <stdio.h>
+
+// https://github.com/nlohmann/json/releases
+#include "json.hpp"
 
 int rand(int n) { return rand() % n; }
 
 class Shape {
+public: typedef std::shared_ptr < Shape > Ptr;
 public: std::string name;
 public: Shape(const std::string &_name) : name(_name) { }
 public: virtual void draw() { std::cout << "drawing: " << name << std::endl; }
@@ -34,24 +39,24 @@ public: void draw() {
 
 class Shapes: public Shape {
 public: Shapes() : Shape("shapes") {}
-public: std::vector < std::shared_ptr < Shape > > parts;
+public: std::vector < Ptr > parts;
 public: void make(int n) {
   char cbuf[1024];
-  parts.resize(n, std::shared_ptr < Shape > (0));
+  parts.resize(n, Ptr(0));
   for (int i=0; i<n; ++i) {
     if ((i%10) <= 5) {
       snprintf(cbuf,sizeof(cbuf),"circle # %d (%d)",rand(10000),i);
-      parts[i]=(std::shared_ptr<Shape>(new Circle(cbuf,rand(100))));
+      parts[i]=Ptr(new Circle(cbuf,rand(100)));
     } else {
       snprintf(cbuf,sizeof(cbuf),"square # %d (%d)",rand(10000),i);      
-      parts[i]=(std::shared_ptr<Shape>(new Square("shape # " +name,rand(100))));
+      parts[i]=Ptr(new Square("shape # " +name,rand(100)));
     }
   }
 }
 
 public: void sort() {
   std::sort(parts.begin(), parts.end(),
-            [](const std::shared_ptr <Shape> & a, const std::shared_ptr <Shape> & b)
+            [](const Ptr & a, const Ptr & b)
             { return a->name > b->name; });
 }
 
@@ -61,8 +66,7 @@ public: void draw() {
   }
 }
   
-public: void run() {
-  int n = 100; // 1000000;
+public: void run(int n) {
   Shapes shapes;
   long t0,t1;
 
@@ -80,7 +84,10 @@ public: void run() {
 };
 
 int main() {
+  nlohmann::json config;
+  std::ifstream("config.json") >> config;
+  int n = config["n"];
   Shapes shapes;
-  shapes.run();
+  shapes.run(n);
   return 0;
 }
