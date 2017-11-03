@@ -5,7 +5,7 @@ import random
 import time
 
 thisdir=os.path.abspath(os.path.dirname(sys.argv[0]))
-cfg=json.load(open(thisdir + '/config.json', 'r'))
+cfg=json.load(open(thisdir + '/../../config.json', 'r'))
 n=cfg["n"]
 
 class Shape:

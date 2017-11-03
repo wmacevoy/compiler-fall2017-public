@@ -3,7 +3,7 @@ import os
 
 # dynamically include local libraries
 thisdir=os.path.abspath(os.path.dirname(sys.argv[0]))
-libdir=thisdir + "/lib"
+libdir=os.path.abspath(thisdir + "/../lib")
 
 for root, dirs, files in os.walk(libdir):
     for dir in dirs:

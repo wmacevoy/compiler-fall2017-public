@@ -4,12 +4,11 @@ import time
 import json
 
 thisdir=os.path.abspath(os.path.dirname(sys.argv[0]))
-cfg=json.load(open(thisdir + '/config.json', 'r'))
+
+cfg=json.load(open(thisdir + '/../../config.json', 'r'))
 n=cfg["n"]
 
-# dynamically include local libraries
-libdir=thisdir + "/lib"
-
+libdir=os.path.abspath(thisdir + "/../lib")
 for root, dirs, files in os.walk(libdir):
     for dir in dirs:
         if dir.startswith("lib."):
