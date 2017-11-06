@@ -12,7 +12,7 @@
 int rand(int n) { return rand() % n; }
 
 class Shape {
-public: typedef std::shared_ptr < Shape > Ptr;
+public: typedef Shape * Ptr;
 public: std::string name;
 public: Shape(const std::string &_name) : name(_name) { }
 public: virtual void draw() { std::cout << "drawing: " << name << std::endl; }
