@@ -49,7 +49,7 @@ public: void make(int n) {
       parts[i]=Ptr(new Circle(cbuf,rand(100)));
     } else {
       snprintf(cbuf,sizeof(cbuf),"square # %d (%d)",rand(10000),i);      
-      parts[i]=Ptr(new Square("shape # " +name,rand(100)));
+      parts[i]=Ptr(new Square(cbuf,rand(100)));
     }
   }
 }
